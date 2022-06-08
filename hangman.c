@@ -32,12 +32,12 @@ void compare(char letra[], char pAdv[], char palavra[], int contador, int i)
 int main()
 {
     char palavra[] = "paralelepipedo";
-    int size = sizeof(palavra);
+    int size = sizeof(palavra)/sizeof(palavra[0]);
     char pAdv[size];
     int contador = 0;
     int aux = 0;
     int i = 0;
-    for(int i = 0; i<size-1; i++)
+    for(int i = 0; i<size; i++)
     {
         pAdv[i] = '_';
     }

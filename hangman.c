@@ -25,28 +25,20 @@ int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, 
     *contador = *contador+1;
 
     printf("A letra %c foi encontrada %d vezes.\n", *letra, contt);
-    return escanear(&letra, pAdv, palavra, &contador, 0, size);
+    return escanear(&letra, pAdv, palavra, contador, 0, size);
 }
 
 int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int size)
 {
 
-    if(*contador == size){
-        //if(aux==size){
-        //int x = 0;
-        //printf("Palavra encontrada: ");
-        //while(pAdv[x] != '\0')
-        //{
-        //    printf("%c", pAdv[x]);
-        //    x+=1;
-        //}
-        //printf("\n");
-
-        printf("Palavra encontrada: ");
+    if(*contador == size+1){
+        system("clear");
+        printf("Parabéns! Você descobriu a palavra.\nPalavra encontrada: ");
         for(int i = 0; i<size; i++)
         {
             printf("%c", pAdv[i]);
         }
+        printf("\n");
         return 0;
     }
 
@@ -85,6 +77,4 @@ int main()
     char letra;
 
     escanear(&letra, pAdv, palavra, &contador, 0, size);
-
-   
 }

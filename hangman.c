@@ -7,32 +7,42 @@ int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int
 
 int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, int i, int size)
 {
+    int x;
     for (int i = 0; i<size; i++)
     {
         char *aux = &pAdv[i];
 
         if(*aux == *letra)
         {
+            system("clear");
             printf("Letra já inserida.\n");
+            x = 0;
             break;
         }
         if(palavra[i] == *letra)
         {
             contt+=1;
             pAdv[i] = *letra;
+            x = 1;
         }
     }
 
+    //adicionar letra não encontrada;
+
     *contador = *contador+1;
 
-    printf("A letra %c foi encontrada %d vezes.\n", *letra, contt);
+    if(x == 1) 
+    {
+        system("clear");
+        printf("A letra '%c' foi encontrada %d vezes.\n", *letra, contt);
+    }
+    
     return escanear(letra, pAdv, palavra, contador, 0, size);
 }
 
 int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int size)
 {
-
-    if(*contador == size+1){
+    if(strcmp(pAdv, palavra) == 0){
         printf("\nParabéns! Você descobriu a palavra.\nPalavra encontrada: ");
         for(int i = 0; i<size; i++)
         {
@@ -49,17 +59,29 @@ int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int
         }
 
     printf("\n\nDigite uma letra: ");
-    scanf("%c", letra);
+    scanf(" %c", letra);
 
     compare(letra, pAdv, palavra, contador, 0, 0, size);
 }
 
 int main()
 {
+
     system("clear");
 
-    char palavra[] = "paralelepipedo";
-    int size = strlen(palavra);
+    char palavra1[] = {"paralelepipedo"};
+    char palavra2[] = {"funcional"};
+    char palavra3[] = {"computador"};
+    char palavra4[] = {"programa"};
+    char palavra5[] = {"televisao"};
+    char palavra6[] = {"havainas"};
+    char palavra7[] = {"racionais"};
+    char palavra8[] = {"universidade"};
+    char palavra9[] = {"academia"};
+    char palavra0[] = {"derrotado"};
+    char pEscolhida[] = {""};
+
+    int size = strlen(palavra8);
 
     char *pAdv = (char*) malloc(size*sizeof(char));
 
@@ -74,5 +96,5 @@ int main()
 
     char letra;
 
-    escanear(&letra, pAdv, palavra, &contador, 0, size);
+    escanear(&letra, pAdv, palavra8, &contador, 0, size);
 }

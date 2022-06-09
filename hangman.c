@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<unistd.h>
 
+int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int size);
+
 int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, int i, int size)
 {
     for (int i = 0; i<size; i++)
@@ -11,7 +13,6 @@ int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, 
 
         if(*aux == *letra)
         {
-            system("clear");
             printf("Letra já inserida.\n");
             break;
         }
@@ -25,15 +26,14 @@ int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, 
     *contador = *contador+1;
 
     printf("A letra %c foi encontrada %d vezes.\n", *letra, contt);
-    return escanear(&letra, pAdv, palavra, contador, 0, size);
+    return escanear(letra, pAdv, palavra, contador, 0, size);
 }
 
 int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int size)
 {
 
     if(*contador == size+1){
-        system("clear");
-        printf("Parabéns! Você descobriu a palavra.\nPalavra encontrada: ");
+        printf("\nParabéns! Você descobriu a palavra.\nPalavra encontrada: ");
         for(int i = 0; i<size; i++)
         {
             printf("%c", pAdv[i]);
@@ -56,21 +56,19 @@ int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int
 
 int main()
 {
+    system("clear");
+
     char palavra[] = "paralelepipedo";
     int size = strlen(palavra);
 
-    char pAdv[size];
+    char *pAdv = (char*) malloc(size*sizeof(char));
 
-    static int contador = 0;
-    int aux = 0;
-    int i = 0;
+    int contador = 0, aux = 0;
 
     for(int i = 0; i<size; i++)
     {
-        pAdv[i] = '_';
+        *(pAdv+i) = '_';
     }
-
-    system("clear");
 
     printf("Palavra escolhida!\n");
 

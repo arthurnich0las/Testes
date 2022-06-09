@@ -3,40 +3,76 @@
 #include<stdlib.h>
 #include<unistd.h>
 
-void compare(char letra[], char pAdv[], char palavra[], int contador, int i)
+int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, int i, int size)
 {
-    if(letra[0] == pAdv[i])
+    for (int i = 0; i<size; i++)
     {
-        printf("Letra já inserida.\n");
-        return;
+        char *aux = &pAdv[i];
+
+        if(*aux == *letra)
+        {
+            system("clear");
+            printf("Letra já inserida.\n");
+            break;
+        }
+        if(palavra[i] == *letra)
+        {
+            contt+=1;
+            pAdv[i] = *letra;
+        }
     }
 
-    if(palavra[i] == '\0')
-    {
-        printf("A letra %c foi encontrada %d vezes.\n", letra[0], contador);
-        return;
+    *contador = *contador+1;
+
+    printf("A letra %c foi encontrada %d vezes.\n", *letra, contt);
+    return escanear(&letra, pAdv, palavra, &contador, 0, size);
+}
+
+int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int size)
+{
+
+    if(*contador == size){
+        //if(aux==size){
+        //int x = 0;
+        //printf("Palavra encontrada: ");
+        //while(pAdv[x] != '\0')
+        //{
+        //    printf("%c", pAdv[x]);
+        //    x+=1;
+        //}
+        //printf("\n");
+
+        printf("Palavra encontrada: ");
+        for(int i = 0; i<size; i++)
+        {
+            printf("%c", pAdv[i]);
+        }
+        return 0;
     }
 
-    if(letra[0] == palavra[i])
-    {
-        pAdv[i] = letra[0];
-        contador+=1;
-        i+=1;
+    printf("\nPalavra: ");
+        for(int i = 0; i<size; i++)
+        {
+            printf("%c", pAdv[i]);
+        }
 
-        compare(letra, pAdv, palavra, contador, i);
-    }
-    
-    
+    printf("\n\nDigite uma letra: ");
+    scanf("%c", letra);
+
+    compare(letra, pAdv, palavra, contador, 0, 0, size);
 }
 
 int main()
 {
     char palavra[] = "paralelepipedo";
-    int size = sizeof(palavra)/sizeof(palavra[0]);
+    int size = strlen(palavra);
+
     char pAdv[size];
-    int contador = 0;
+
+    static int contador = 0;
     int aux = 0;
     int i = 0;
+
     for(int i = 0; i<size; i++)
     {
         pAdv[i] = '_';
@@ -44,39 +80,11 @@ int main()
 
     system("clear");
 
-    printf("Palavra escolhida...\n");
-    sleep(1);
+    printf("Palavra escolhida!\n");
 
-    char letra[1];
-    while(1)
-    {
-        printf("Palavra: ");
-        int x = 0;
-        while(pAdv[x] != '\0')
-        {
-            printf("%c", pAdv[x]);
-            x++;
-        }
-        printf("\n\n");
+    char letra;
 
-        printf("Digite uma letra: ");
-        scanf(" %c", &letra[0]);
-        
-        compare(letra, pAdv, palavra, 0, 0);
+    escanear(&letra, pAdv, palavra, &contador, 0, size);
 
-        printf("A letra %c foi encontrada %d vezes\n\n", letra[0], contador);
-        contador=0;
-        if(aux==size){
-            int x = 0;
-            printf("Palavra encontrada: ");
-            while(pAdv[x] != '\0')
-            {
-                printf("%c", pAdv[x]);
-                x+=1;
-            }
-            printf("\n");
-            return 0;
-        }
-    }
-
+   
 }

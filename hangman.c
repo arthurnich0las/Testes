@@ -7,7 +7,7 @@ int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int
 
 int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, int i, int size, int *vidas, int *chances)
 {
-    int x;
+    int x = 0;
     for (int i = 0; i<size; i++)
     {
         char *aux = &pAdv[i];
@@ -45,6 +45,17 @@ int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, 
 
 int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int size, int *vidas, int *chances)
 {
+    if(*vidas == 0){
+        int opc;
+        system("clear");
+        printf("Acabaram suas vidas :(\n\n");
+        printf("Gostaria de tentar novamente?\n");
+        printf("\n0 - Encerrar programa\n1 - Tentar novamente\n");
+        scanf("%d", opc);
+        if(opc == 0) { exit(0);}
+        else if (opc==1) { main();} 
+    }
+
     if(strcmp(pAdv, palavra) == 0){
         printf("\nParabéns! Você descobriu a palavra em %d chances.\n\nPalavra encontrada: '", *chances);
         for(int i = 0; i<size; i++)

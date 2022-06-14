@@ -29,6 +29,7 @@ int compare(char *letra, char pAdv[], char palavra[], int *contador, int contt, 
 
     if (contt == 0){            //condição para quando não encontrar nenhuma letra
         system("clear");
+        *vidas = *vidas - 1;
         printf("A letra '%c' não foi encontrada\n", *letra);
     }
 
@@ -77,7 +78,7 @@ int escanear(char *letra, char pAdv[], char palavra[], int *contador, int i, int
 
     printf("\n\nDigite uma letra: ");
     scanf(" %c", letra);
-    *vidas = *vidas - 1;
+      //perder vida quando acerta nao da
     *chances = *chances +1;
 
     compare(letra, pAdv, palavra, contador, 0, 0, size, vidas, chances);
@@ -101,7 +102,7 @@ int main()
     char palavra0[] = {"derrotado"};
     char pEscolhida[] = {""};
 
-    int size = strlen(palavra8);
+    int size = strlen(palavra7);
 
     char *pAdv = (char*) malloc(size*sizeof(char));
 
@@ -116,5 +117,5 @@ int main()
 
     char letra;
 
-    escanear(&letra, pAdv, palavra8, &contador, 0, size, &vidas, &chances);
+    escanear(&letra, pAdv, palavra7, &contador, 0, size, &vidas, &chances);
 }
